@@ -1,31 +1,19 @@
+bool SplitLineIntoFields(const char* line, char* fields[CSV_FIELDS]) {
+    int fieldCount = 0;
+    char* lineCopy = strdup(line);
+    char* token = strtok(lineCopy, ",");
 
-char** SplitString(const char* inputString, char delimiter) {
-    int delimiterCount = 0;
-    const char* pointer = inputString;
-    while (*pointer != '\0') {
-        if (*pointer++ == delimiter) {
-            delimiterCount++;
-        }
+    while (token != NULL && fieldCount < CSV_FIELDS) {
+        fields[fieldCount++] = token;
+        token = strtok(NULL, ",");
     }
 
-    char** referenceOfStringReference = (char**)malloc(sizeof(char*) * (delimiterCount + 2));
-    int delimiterIndex = 0;
-    pointer = inputString;
-    char* stringReference = (char*)malloc(strlen(inputString) + 1);
-    int inputStringIndex = 0;
-    while (*pointer != '\0') {
-        if (*pointer == delimiter) {
-            stringReference[inputStringIndex] = '\0';
-            referenceOfStringReference[delimiterIndex++] = strdup(stringReference);
-            inputStringIndex = 0;
-        } else {
-            stringReference[inputStringIndex++] = *pointer;
-        }
-        pointer++;
+    if (fieldCount != CSV_FIELDS) {
+        fprintf(stderr, "WARN: Line malformed. Only %d field(s) found.\n", fieldCount);
+        free(lineCopy);
+        return false;
     }
-    stringReference[inputStringIndex] = '\0';
-    referenceOfStringReference[delimiterIndex++] = strdup(stringReference);
-    referenceOfStringReference[delimiterIndex] = NULL;
-    free(stringReference);
-    return referenceOfStringReference;
+
+    fields[CSV_FIELDS] = NULL;  // Null-terminate the array
+    return true;
 }
