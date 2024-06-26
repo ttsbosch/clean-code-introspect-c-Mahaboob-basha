@@ -1,3 +1,5 @@
+#define CSV_FIELDS 3
+
 bool SplitLineIntoFields(const char* line, char* fields[CSV_FIELDS]) {
     int fieldCount = 0;
     char* lineCopy = strdup(line);
