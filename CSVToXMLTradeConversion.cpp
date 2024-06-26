@@ -88,7 +88,7 @@ void ConvertCSVToXML(FILE* inputFile, const char* outputFilePath) {
 }
 
 int main() {
-    FILE* inputFile = fopen("input.csv", "r");
+    FILE* inputFile = fopen("trades.txt", "r");
     if (inputFile == NULL) {
         fprintf(stderr, "ERROR: Could not open input file: %s\n", strerror(errno));
         return EXIT_FAILURE;
