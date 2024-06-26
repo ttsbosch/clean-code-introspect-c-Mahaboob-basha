@@ -17,15 +17,15 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 add_compile_options("--coverage")
 add_executable(
-#  cleancoder
+  cleancoder
   CSVToXMLTradeConversion.cpp
-# TradeProcessor.Tests.cpp
+  TradeProcessor.Tests.cpp
 )
 target_link_libraries(
-#  cleancoder
+  cleancoder
   GTest::gmock_main
   gcov
 )
 
 include(GoogleTest)
-# gtest_discover_tests(cleancoder)
+gtest_discover_tests(cleancoder)
