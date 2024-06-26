@@ -6,7 +6,6 @@
 #define MAX_TRADE_RECORDS 1024
 #define CURRENCY_CODE_LENGTH 3
 #define CURRENCY_PAIR_LENGTH 6
-#define CSV_FIELDS 3
 #define LOT_SIZE 100000
 
 bool ValidateTradeTokens(char* fields[CSV_FIELDS], int lineCount);
